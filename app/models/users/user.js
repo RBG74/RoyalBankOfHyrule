@@ -1,24 +1,18 @@
-"use strict"
+var mongoose = require('mongoose'),
+    extend = require('mongoose-schema-extend');
+var Schema = mongoose.Schema;
 
-class User{
-    constructor(technologicalAdress, password, firstname, lastname){
-        if(this.validateTechnologicalAdress(technologicalAdress))
-            this.technologicalAdress = technologicalAdress;
-        else
-            throw new Error('This is not a correct technological adress.');
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
+var UserSchema = new Schema(
+    {
+        technologicalAdress: String,
+        firstname: String,
+        lastname: String,
+        password: String
+    }, 
+    { 
+        collection: 'users', 
+        discriminatorkey: '_type' 
     }
+);
 
-    getFullName(){
-        return this.firstname + ' ' + this.lastname;
-    }
-
-    validateTechnologicalAdress(technologicalAdress) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(technologicalAdress);
-    }
-}
-
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);
