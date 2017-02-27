@@ -1,26 +1,16 @@
-# OS X
-.DS_Store*
-Icon?
-._*
-
 # Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Linux
-.directory
-*~
-
+app/Thumbs.db
+app/ehthumbs.db
+app/Desktop.ini
 
 # npm
-node_modules
+app/node_modules
 *.log
 *.gz
 
 
 # Coveralls
-coverage
+app/coverage
 
 # Benchmarking
-benchmarks/graphs
+app/benchmarks/graphs

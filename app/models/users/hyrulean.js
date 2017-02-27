@@ -2,7 +2,9 @@ var mongoose = require('mongoose'),
     extend = require('mongoose-schema-extend');
 var Schema = mongoose.Schema;
 
-var HyruleanSchema = new userSchema.extend(
+var userSchema = require('./user');
+
+var HyruleanSchema = userSchema.extend(
     {
         rupeePouch: [{
             isSavingsPouch: Boolean,
