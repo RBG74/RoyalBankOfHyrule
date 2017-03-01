@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/* Database connection */
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/RBH');
 var db = mongoose.connection;
@@ -13,8 +14,8 @@ db.once('open', function() {
 });
 
 /*
-var User = require('./models/user');
-var Hyrulean = require('./models/hyrulean');
+var User = require('./models/users/user');
+var Hyrulean = require('./models/users/hyrulean');
 
 var Bob = new Hyrulean({
   username: 'Bob420',

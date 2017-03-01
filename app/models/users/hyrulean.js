@@ -9,6 +9,7 @@ var options = {
 
 var HyruleanSchema = new Schema({
     rupees: Number
+    //pouches: [{ type: Schema.Types.ObjectId, ref: 'Pouches' }]
 }, options);
 
 var Hyrulean = User.discriminator('Hyrulean', HyruleanSchema);

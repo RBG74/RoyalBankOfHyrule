@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../../models/user');
-var Hyrulean = require('../../models/hyrulean');
+var User = require('../../models/users/user');
+var Hyrulean = require('../../models/users/hyrulean');
 
 /* Form de création d'utilisateur */
 router.get('/new', function(req, res, next) {

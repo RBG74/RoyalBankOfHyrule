@@ -6,7 +6,7 @@ var options = {
 };
 
 var userSchema = new Schema({
-  technologicalAdress: { type: String, required: true, unique: true },
+  technologicalAdress: { type: String, required: true },
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   password: { type: String, required: true },
