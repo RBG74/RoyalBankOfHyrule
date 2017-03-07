@@ -45,6 +45,8 @@ var users = require('./routes/users/users');
 app.use('/users', users);
 var hyruleans = require('./routes/users/hyruleans');
 app.use('/users/hyruleans', hyruleans);
+var pouches = require('./routes/pouches');
+app.use('/pouches', pouches);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,14 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../../models/users/user');
+var user_controller = require('../../controllers/userController');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  User.find({}, function(err, users) {
-    if(err) 
-      res.json(err);
-    res.json(users);
-  });
-});
+/* Get all users. */
+router.get('/', user_controller.getAll);
 
 module.exports = router;

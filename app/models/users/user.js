@@ -8,7 +8,7 @@ var options = {
 var userSchema = new Schema({
   technologicalAdress: { type: String, required: true },
   firstname: { type: String, required: true },
-  lastname: { type: String, required: true },
+  lastname: { type: String, required: false },
   password: { type: String, required: true },
   created_at: Date,
   updated_at: Date
