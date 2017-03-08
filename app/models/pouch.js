@@ -28,7 +28,7 @@ var pouchSchema = new Schema({
 });
 
 pouchSchema.pre('save', function(next) {
-    if(this.owner.kind != "Hyrulean"){
+    if(false/*this.owner.kind != "Hyrulean"*/){
          var err = new Error('Only an hyrulean can have a pouch.');
          next(err);
     } else {

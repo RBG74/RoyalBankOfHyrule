@@ -7,7 +7,7 @@ exports.getAll = function (req, res, next) {
         .find({})
         .exec(function(err, hyruleans) {
             if(err) 
-                return res.json({status:400, error:err});
+                return res.json({status:400, err});
             return res.json({status:200, content:hyruleans});
         });
 };
@@ -27,7 +27,7 @@ exports.postNew = function (req, res, next) {
     });
     newCounsellor.save(function(err){
         if(err)
-            return res.json({status:400, error:err});
+            return res.json({status:400, err});
         console.log('Counsellor saved sucessfully!');
         return res.json({status: 200, content:newCounsellor});
     });

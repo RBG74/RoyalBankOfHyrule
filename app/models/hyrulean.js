@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var passportLocalMongoose = require('passport-local-mongoose');
 
 var Pouch = require('./pouch');
 
@@ -8,10 +9,11 @@ var options = {
 };
 
 var hyruleanSchema = new Schema({
-  technologicalAdress: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
+  technologicalAdress: { type: String, required: true, unique: true },
   firstname: { type: String, required: true },
   lastname: { type: String, required: false },
-  password: { type: String, required: true },
+  //password: { type: String, required: true },
   created_at: Date,
   updated_at: Date
 }, options);
@@ -24,5 +26,6 @@ hyruleanSchema.pre('save', function(next) {
   next();
 });
 
+hyruleanSchema.plugin(passportLocalMongoose);
 var Hyrulean = mongoose.model('Hyrulean', hyruleanSchema);
 module.exports = Hyrulean;

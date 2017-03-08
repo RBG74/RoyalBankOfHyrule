@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
             .populate('owner', 'firstname')
             .exec(function(err, pouches) {
                 if(err) 
-                    return res.json({status:400, error:err});
+                    return res.json({status:400, err});
                 return res.json({status:200, content:pouches});
             });
 });
