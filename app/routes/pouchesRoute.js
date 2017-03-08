@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/users/user');
-var Hyrulean = require('../models/users/hyrulean');
+var Hyrulean = require('../models/hyrulean');
 var Pouch = require('../models/pouch');
 
 /* Get all pouches. */
@@ -11,8 +10,8 @@ router.get('/', function(req, res, next) {
             .populate('owner', 'firstname')
             .exec(function(err, pouches) {
                 if(err) 
-                    res.json(err);
-                res.json(pouches);
+                    return res.json({status:400, error:err});
+                return res.json({status:200, content:pouches});
             });
 });
 

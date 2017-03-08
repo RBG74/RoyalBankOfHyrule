@@ -41,11 +41,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* Routes */
 var index = require('./routes/index');
 app.use('/', index);
-var users = require('./routes/users/users');
-app.use('/users', users);
-var hyruleans = require('./routes/users/hyruleans');
-app.use('/users/hyruleans', hyruleans);
-var pouches = require('./routes/pouches');
+var hyruleans = require('./routes/hyruleansRoute');
+app.use('/hyruleans', hyruleans);
+var counsellors = require('./routes/counsellorsRoute');
+app.use('/counsellors', counsellors);
+var pouches = require('./routes/pouchesRoute');
 app.use('/pouches', pouches);
 
 // catch 404 and forward to error handler

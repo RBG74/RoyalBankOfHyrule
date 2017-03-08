@@ -1,13 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var User = require('./users/user');
-var Pouch = require('./users/hyrulean');
+var Pouch = require('./hyrulean');
 
 var pouchSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Hyrulean'
     },
     type: {
         type: String,
@@ -29,11 +28,16 @@ var pouchSchema = new Schema({
 });
 
 pouchSchema.pre('save', function(next) {
-  var currentDate = new Date();
-  if( !this.created_at )
-    this.created_at = currentDate;
-  this.updated_at = currentDate;
-  next();
+    if(this.owner.kind != "Hyrulean"){
+         var err = new Error('Only an hyrulean can have a pouch.');
+         next(err);
+    } else {
+        var currentDate = new Date();
+        if( !this.created_at )
+            this.created_at = currentDate;
+        this.updated_at = currentDate;
+        next();
+    }
 });
 
 var Pouch = mongoose.model('Pouch', pouchSchema);
