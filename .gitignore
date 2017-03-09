@@ -2,15 +2,21 @@
 app/Thumbs.db
 app/ehthumbs.db
 app/Desktop.ini
+rbh/Thumbs.db
+rbh/ehthumbs.db
+rbh/Desktop.ini
 
 # npm
 app/node_modules
+rbh/node_modules
 *.log
 *.gz
 
 
 # Coveralls
 app/coverage
+rbh/coverage
 
 # Benchmarking
 app/benchmarks/graphs
+rbh/benchmarks/graphs

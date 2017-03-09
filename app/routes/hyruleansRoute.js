@@ -4,7 +4,7 @@ var hyruleanController = require('../controllers/hyruleanController');
 var verify = require('./verify');
 
 // LOGIN PASSPORT
-router.post('/login', hyruleanController.login);
+router.post('/login', hyruleanController.postLogin);
 
 /* Traitement du form de création */
 router.post('/register', hyruleanController.postNew);

@@ -32,14 +32,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 /* Config passport */
 var Hyrulean = require('./models/hyrulean');
+/* Creating admin user if it doesn't exists yet */
+Hyrulean.findOne({ 'technologicalAdress': 'Admin' }, function (err, admin) {
+  if (err) 
+    return res.json({status:400, err});
+  if(!admin){
+    var admin = new Hyrulean({
+      username: "Admin",
+      technologicalAdress: "Admin",
+      password: "Admin",
+      isAdmin: true
+    });
+    Hyrulean.register(
+      admin,
+      "Admin", 
+      function(err) {
+          if(err){
+              console.error(err);
+              return res.json({status:400, err, admin});
+          }
+          console.log("Admin created sucessfully.")
+      }
+    );
+  } else {
+    console.log("Admin account already exists.");
+  }
+})
+
 app.use(passport.initialize());
 passport.use(new localStrategy(Hyrulean.authenticate()));
 passport.serializeUser(Hyrulean.serializeUser());
 passport.deserializeUser(Hyrulean.deserializeUser());
 
 /* Routes */
-var index = require('./routes/index');
-app.use('/', index);
+var front = require('./routes/front');
+app.use('/', front);
 var hyruleans = require('./routes/hyruleansRoute');
 app.use('/hyruleans', hyruleans);
 var counsellors = require('./routes/counsellorsRoute');

@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Pouch = require('./hyrulean');
-
 var pouchSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
@@ -17,18 +15,16 @@ var pouchSchema = new Schema({
         type: Number,
         default: 0
     },
-    history: [
-        {
-            type: Schema.Types.ObjectId, 
-            ref: 'History'
-        }
-    ],
+    history: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Transaction'
+    }],
     created_at: Date,
     updated_at: Date
 });
 
 pouchSchema.pre('save', function(next) {
-    if(false/*this.owner.kind != "Hyrulean"*/){
+    if(this.owner.kind == "Counsellor" || this.owner.kind == "Admin" ){
          var err = new Error('Only an hyrulean can have a pouch.');
          next(err);
     } else {

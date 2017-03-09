@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 
 exports.getToken = function(Hyrulean) {
-	return jwt.sign(Hyrulean, config.secretKey, { expiresInMinutes: "1h" });
+	return jwt.sign(Hyrulean, config.secretKey);
 };
 
 exports.verifyHyrulean = function(req, res, next) {

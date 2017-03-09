@@ -13,17 +13,30 @@ exports.getAll = function (req, res, next) {
         });
 };
 
-exports.login = function(req, res, next) {
-    passport.authenticate('local', function(err, Hyrulean, info) {
-      req.logIn(Hyrulean, function(err) {
-        var token = verify.getToken(Hyrulean);
-        console.log("Hyrulean: "+Hyrulean);
-        
-        res.cookie('auth',token);
-        return res.json({status:200, content:token});
-      });
+exports.postLogin = function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/login'); }
+        req.logIn(user, function(err) {
+            var token = verify.getToken(user);
+            console.log(req.body);
+            res.cookie('userAdress', req.body.InputTechnologicalAdress);
+            res.cookie('auth',token);
+            console.log(req.cookies);
+            return res.json({status:200, content:token});
+        });
     })(req, res, next);
 };
+
+exports.getOne = function (req, res, next) {
+    var userid = res.cookies.userid;
+    Hyrulean.findOne({ '_id': userid }, function (err, connecteduser) {
+        if (err) return handleError(err);
+        console.log('%s %s is a %s.', person.name.first, person.name.last, person.occupation) // Space Ghost is a talk show host.
+    })
+    return res.json({status:501, content:"Not implemented yet."});
+};
+
 
 exports.getNew = function (req, res, next) {
     return res.json({status:501, content:"Not implemented yet."});
@@ -32,7 +45,7 @@ exports.getNew = function (req, res, next) {
 exports.postNew = function (req, res, next) {
     /* We create the hyrulean and make him two pouches */
     var newHyrulean = new Hyrulean({
-        username: req.body.username,
+        username: req.body.technologicalAdress,
         technologicalAdress: req.body.technologicalAdress,
         firstname: req.body.firstname,
         lastname: req.body.lastname
