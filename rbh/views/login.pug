@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  div(class="row")
+    form(class="col-lg-offset-1 col-lg-6", method="post")
+        div(class="form-group")
+            label(for="technologicalAdress") Technological adress
+            input(type="text", class="form-control", id="technologicalAdress")
+        div(class="form-group")
+            label(for="password") Password
+            input(type="password", class="form-control", id="password")
+        div
+            input(type="submit", class="btn btn-primary")

@@ -1,8 +1,8 @@
 var passport = require('passport');
 var Hyrulean = require('../../models/userHyrulean');
 
-exports.signin = function(req, res, next){
-    passport.authenticate('local.signup', function(err, hyrulean, info){
+exports.register = function(req, res, next){
+    passport.authenticate('local.register', function(err, hyrulean, info){
         if (err) { 
             return res.json({status: 400, error: err});
         }

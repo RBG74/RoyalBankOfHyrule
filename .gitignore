@@ -11,7 +11,7 @@ app/node_modules
 rbh/node_modules
 *.log
 *.gz
-
+*.ink
 
 # Coveralls
 app/coverage

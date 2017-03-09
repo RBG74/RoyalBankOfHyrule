@@ -14,7 +14,7 @@ passport.deserializeUser(function(id, done){
   });
 });
 
-passport.use('local.signup', new LocalStrategy(
+passport.use('local.register', new LocalStrategy(
     {
         usernameField: 'technologicalAdress',
         passwordField: 'password',
