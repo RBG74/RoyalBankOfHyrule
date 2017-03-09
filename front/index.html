@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#getAll").click(function(){
+        $.ajax({
+            url: "http://localhost:3000/hyrulean/all", 
+            method: "get",
+            success: function(result){
+                console.log(result);
+            }
+        });
+    });
+    $("#login").click(function(){
+        $.ajax({
+            url: "http://localhost:3000/hyrulean/login", 
+            method: "post",
+            data: { 
+                "technologicalAdress": "link@knight.hy",
+                "password": "triforc3"
+            },
+            success: function(result){
+                console.log(result);
+            }
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button id="getAll">getAll</button>
+<button id="login">login</button>
+<button id="getAll">Get External Content</button>
+
+</body>
+</html>
