@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  div(class="row")
+    div(class="col-lg-offset-1 col-lg-10 jumbotron")
+        if user
+          if user.kind=="Hyrulean"
+            h2 User type: #{user.kind}
+            ul
+              li Technological adress: #{user.technologicalAdress}
+              li Firstname: #{user.firstname}
+              li Lastname: #{user.lastname}
+          if user.kind=="Counsellor"
+            h2 User type: #{user.kind}
+          if user.isAdmin
+            h2 User type: Admin

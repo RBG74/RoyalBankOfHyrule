@@ -10,7 +10,7 @@ var schema = mongoose.Schema(
         technologicalAdress: {type: String, requried: true, unique: true},
         password: {type: String, requried: true},
         isAdmin: {type: Boolean, default: false}
-    }, 
+    },
     {
         discriminatorKey: 'kind'
     }

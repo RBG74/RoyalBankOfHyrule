@@ -1,8 +1,11 @@
 var passport = require('passport');
 
 exports.isLoggedIn = function(req, res, next){
+    //console.log("util.js isLoggedIn");
     if(req.isAuthenticated()){
         return next();
     }
-    return res.json({status:401, message: "Not logged in."});
+    req.session.success = false;
+    req.session.errors = "You need to be logged in.";
+    res.redirect('login');
 };
