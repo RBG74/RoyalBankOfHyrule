@@ -1,10 +1,23 @@
 var passport = require('passport');
 var Hyrulean = require('../models/userHyrulean');
+var Counsellor = require('../models/userCounsellor');
 var Pouch = require('../models/pouch');
 
 exports.register = function(req, res, callback){
     if(req.body.isCounsellor){
-        //TODO: handle counsellor registration
+        var newCounsellor = new Counsellor({
+            technologicalAdress: req.body.technologicalAdress,
+            password: req.body.password,
+            clients: []
+        });
+        newCounsellor.password = newCounsellor.encryptPassword(newCounsellor.password);
+        newCounsellor.save(function(err, counsellor){
+            if(err) {
+                req.session.errors = err;
+                return callback();
+            }
+            callback(counsellor);
+        });
     }
     else{
         var newHyrulean = new Hyrulean({
@@ -17,7 +30,9 @@ exports.register = function(req, res, callback){
         //save the user
         newHyrulean.save(function(err, hyrulean){
             if(err) {
+                console.log('plop', err);
                 req.session.errors = err;
+                return callback();
             }
             var checkingPouch = new Pouch({
                 owner: hyrulean._id,
@@ -25,12 +40,20 @@ exports.register = function(req, res, callback){
             });
             //save 1st pouch
             checkingPouch.save(function(err){
+                if(err) {
+                    req.session.errors = err;
+                    return callback();
+                }
                 var savingPouch = new Pouch({
                     owner: hyrulean._id,
                     type: 'Savings pouch',
                     rupees: 2000
                 });
                 savingPouch.save(function(err){
+                    if(err) {
+                        req.session.errors = err;
+                        return callback();
+                    }
                     var pouches = [];
                     pouches.push(checkingPouch);
                     pouches.push(savingPouch);
@@ -41,12 +64,14 @@ exports.register = function(req, res, callback){
     }
 };
 
-exports.getAll = function (req, res, next) {
+exports.getAll = function (req, res, callback) {
     Hyrulean
         .find({})
         .exec(function(err, hyruleans) {
-            if(err)
-                return res.json({status:400, error: err});
-            return res.json({status:200, content:hyruleans});
+            if(err){
+                req.session.errors = err;
+                return callback();
+            }
+            callback(hyruleans);
         });
 };

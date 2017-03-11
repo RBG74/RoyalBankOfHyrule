@@ -6,13 +6,34 @@ block content
         if user
           if user.kind=="Hyrulean"
             h2 Technological adress: #{user.technologicalAdress}
-            ul
+            ul(class="list-group")
               each pouch in pouches
-                li
-                    span= pouch.type
+                li(class="list-group-item")
+                    h3= pouch.type
                     br
                     span Ruppes amount: #{pouch.rupees}
-                //li= item.type
+                    br
+                    if pouch.type=="Checking pouch"
+                      p History:
+                        ul(class="list-group")
+                          each transfer in pouch.history
+                            li(class="list-group-item")
+                              ul
+                                li Date: #{transfer.date.toLocaleDateString()}
+                                li Rupees amount: #{transfer.amount}
+                                  if transfer.amount>0
+                                    li Transfered from: #{transfer.concernedPouch.owner.technologicalAdress}'s #{transfer.concernedPouch.type.toLowerCase()}
+                                  else
+                                    li Transfered to: #{transfer.concernedPouch.owner.technologicalAdress}'s #{transfer.concernedPouch.type.toLowerCase()}
+                      form(method="post", class="form-inline")
+                        label(for='selecthyrulean') Transfer to: 
+                        select(class="form-control", id="selecthyrulean", name="target")
+                          each option in hyruleans
+                            option(value=option._id) #{option.technologicalAdress} 
+                        label(for='amount') Amount to transfer: 
+                        input(type="number", id="amount" name="amount", min='0')
+                        input(type="submit", class="btn btn-primary", value="Transfer")
+
           if user.kind=="Counsellor"
             h2 User type: #{user.kind}
           if user.isAdmin

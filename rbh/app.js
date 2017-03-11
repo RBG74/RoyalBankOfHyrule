@@ -13,6 +13,7 @@ mongoose.connect('mongodb://localhost:27017/rbh');
 var db = mongoose.connection;
 db.once('open', function() {
   //console.log("Connection to database successfull :)");
+  require('./config/admin');
 });
 
 var app = express();
@@ -35,8 +36,8 @@ require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function (req, res, next) {
+  //To be able to know if an user is logged in from the view
   res.locals.login = req.isAuthenticated();
-  //res.locals.user = req.user;
   next();
 });
 

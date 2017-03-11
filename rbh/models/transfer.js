@@ -5,7 +5,7 @@ var Transaction = require('./transaction');
 
 var schema = new Schema(
     {
-        transferedTo:{
+        concernedPouch:{
             type: Schema.Types.ObjectId,
             ref: 'Pouch',
             required: true

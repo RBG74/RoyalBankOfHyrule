@@ -12,5 +12,14 @@ block content
               li Lastname: #{user.lastname}
           if user.kind=="Counsellor"
             h2 User type: #{user.kind}
+            p TODO:
+            ul
+              li Counsellors can access his clients' pouches.
+              li but can't do any operation
           if user.isAdmin
             h2 User type: Admin
+            blockquote(class="blockquote") Fourmi adulte dont le but est de protéger et nourrir la fourmillière.
+            p TODO: 
+            ul
+              li Admin can link hyruleans to counsellors.
+              li Admin can do the same shit as counsellors.

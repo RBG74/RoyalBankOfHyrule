@@ -5,6 +5,7 @@ var pouchController = require('../pouchController');
 exports.getLogin = function(req, res, next){
     //console.log("frontController.js getLogin");
     res.render('login', { errors: req.session.errors });
+    console.log("after render");
     req.session.errors = null;
     req.session.success = null;
 }
@@ -70,14 +71,24 @@ exports.getPouches = function(req, res, next){
     console.log(req.user.kind);
     if(req.user.kind=="Hyrulean"){
         pouchController.getLoggedUserPouches(req, res, function(pouches){
-            console.log(pouches);
-            res.render('loggedin/pouches', { user: req.user, pouches: pouches });
-            req.session.errors = null;
-            req.session.success = null;
+            hyruleanController.getAll(req, res, function(hyruleans){
+                console.log(pouches[0].history[0].concernedPouch.owner);   
+                res.render('loggedin/pouches', { user: req.user, pouches: pouches, hyruleans: hyruleans });
+                req.session.errors = null;
+                req.session.success = null;
+            })
         });
     }else{
         req.session.errors = "Only an hyrulean can see this page.";
         res.redirect('/login');
         req.session.errors = null;
     }
+}
+
+exports.postPouches = function(req, res, next){
+    pouchController.postTransfer(req, res, function(){
+        console.log("postPouches", req.session.errors);
+        res.redirect('/pouches');
+        req.session.errors = null;
+    });
 }

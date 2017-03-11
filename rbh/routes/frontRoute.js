@@ -18,6 +18,7 @@ router.post('/register', frontController.postRegister);
 
 router.get('/profile', util.isLoggedIn, frontController.getProfile);
 router.get('/pouches', util.isLoggedIn, frontController.getPouches);
+router.post('/pouches', util.isLoggedIn, frontController.postPouches);
 //router.post('/login', frontController.postLogin);
 
 module.exports = router;
